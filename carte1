@@ -40,6 +40,7 @@
 	</style>
 </head>
 <body>
+<div id="tooltip"></div>
 
 	<div class="carte">
 		<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 667 578" xml:space="preserve">
@@ -220,23 +221,20 @@
 	</div>
 
 <script>
-function initializeTooltips() {
-    const departments = document.querySelectorAll('.departement path');
+document.addEventListener('DOMContentLoaded', function() {
+    // Find all department paths in the SVG
+    const departments = document.querySelectorAll('.departement');
 
-    // Create tooltip element
-    const tooltip = document.createElement('div');
-    tooltip.id = 'tooltip';
-    document.body.appendChild(tooltip);
-
-    // Show tooltip
+    // Function to show tooltip
     function showTooltip(evt, text) {
+        let tooltip = document.getElementById('tooltip');
         tooltip.innerHTML = text;
-        tooltip.style.display = 'block';
+        tooltip.style.display = "block";
         tooltip.style.left = evt.pageX + 10 + 'px';
         tooltip.style.top = evt.pageY + 10 + 'px';
     }
 
-    // Add event listeners
+    // Add hover event listeners to each department
     departments.forEach(function(dept) {
         dept.addEventListener('mouseenter', function(e) {
             const departmentName = e.target.getAttribute('data-nom');
@@ -244,10 +242,10 @@ function initializeTooltips() {
         });
 
         dept.addEventListener('mouseleave', function() {
-            tooltip.style.display = 'none';
+            document.getElementById('tooltip').style.display = "none";
         });
     });
-}
+});
 </script>
 	
 </body>
