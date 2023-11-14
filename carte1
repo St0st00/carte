@@ -220,20 +220,23 @@
 	</div>
 
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-    // Find all department paths in the SVG
-    const departments = document.querySelectorAll('.departement');
+function initializeTooltips() {
+    const departments = document.querySelectorAll('.departement path');
 
-    // Function to show tooltip
+    // Create tooltip element
+    const tooltip = document.createElement('div');
+    tooltip.id = 'tooltip';
+    document.body.appendChild(tooltip);
+
+    // Show tooltip
     function showTooltip(evt, text) {
-        let tooltip = document.getElementById('tooltip');
         tooltip.innerHTML = text;
-        tooltip.style.display = "block";
+        tooltip.style.display = 'block';
         tooltip.style.left = evt.pageX + 10 + 'px';
         tooltip.style.top = evt.pageY + 10 + 'px';
     }
 
-    // Add hover event listeners to each department
+    // Add event listeners
     departments.forEach(function(dept) {
         dept.addEventListener('mouseenter', function(e) {
             const departmentName = e.target.getAttribute('data-nom');
@@ -241,10 +244,10 @@ document.addEventListener('DOMContentLoaded', function() {
         });
 
         dept.addEventListener('mouseleave', function() {
-            document.getElementById('tooltip').style.display = "none";
+            tooltip.style.display = 'none';
         });
     });
-});
+}
 </script>
 	<footer>
 		<a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Licence Creative Commons" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/80x15.png" /></a> Ce(tte) œuvre est mise à disposition selon les termes de la <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Licence Creative Commons Attribution 4.0 International</a>.
